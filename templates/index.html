@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container text-center">
+        <h1 class="my-4 text-primary">Welcome to the Steganography Tool</h1>
+        <p>Securely encode and decode hidden messages within images.</p>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="text-primary">Encode Message</h2>
+                <form action="{{ url_for('encode') }}" method="post" enctype="multipart/form-data" class="mb-4">
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Select Image (PNG only):</label>
+                        <input type="file" id="image" name="image" accept="image/png" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Enter Message to Encode:</label>
+                        <input type="text" id="message" name="message" placeholder="Enter your secret message" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Encode Message</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h2 class="text-primary">Decode Message</h2>
+                <form action="{{ url_for('decode') }}" method="post" enctype="multipart/form-data" class="mb-4">
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Select Encoded Image (PNG only):</label>
+                        <input type="file" id="image" name="image" accept="image/png" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Decode Message</button>
+                </form>
+            </div>
+        </div>
+        
+        {% if decoded_message %}
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Decoded Message:</h4>
+            <p>{{ decoded_message }}</p>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}

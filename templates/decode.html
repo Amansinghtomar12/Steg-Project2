@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container text-center">
+    <h1 class="my-4 text-primary">Decode Message</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="image" class="form-label">Select Encoded Image (PNG only):</label>
+            <input type="file" name="image" id="image" class="form-control" accept="image/png" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Decode</button>
+    </form>
+
+    {% if secret_message %}
+    <div class="alert alert-success mt-4" role="alert">
+        <h4 class="alert-heading">Decoded Message:</h4>
+        <p>{{ secret_message }}</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

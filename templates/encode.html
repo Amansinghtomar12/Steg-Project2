@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container text-center">
+    <h1 class="my-4 text-primary">Encode Your Message</h1>
+    <form action="/encode" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="image" class="form-label">Select Image:</label>
+            <input type="file" name="image" id="image" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">Secret Message:</label>
+            <input type="text" name="message" id="message" class="form-control" placeholder="Enter your secret message" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Encode Message</button>
+    </form>
+
+    {% if img_path %}
+    <div class="alert alert-success mt-4" role="alert">
+        <h4 class="alert-heading">Encoded Image:</h4>
+        <p>Your image has been successfully encoded. You can download it <a href="{{ url_for('static', filename='images/' + img_path) }}" class="alert-link">{{ img_path }}</a>.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
